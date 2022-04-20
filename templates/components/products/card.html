@@ -73,7 +73,9 @@
                     lazyload=theme_settings.lazyload_mode
                     default_image=theme_settings.default_image_product
                 }}
+
             </div>
+            <img class="card-image lazyload" onmouseover="this.src='{{getImage images.[1] img size (cdn default)}}'" onmouseout="this.src='{{getImage image 'productgallery_size' (cdn default)}}'" data-sizes="auto" src="{{cdn 'img/loading.svg'}}" data-src="{{getImage image 'productgallery_size' (cdn theme_settings.default_image_product)}}" alt="{{image.alt}}" title="{{image.alt}}">
         </a>
 
         <figcaption class="card-figcaption">
