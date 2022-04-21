@@ -32,6 +32,7 @@ category:
 {{/unless}}
 {{{category.description}}}
 <div class="page">
+<button type="button" id="addToCart">Add Bundle to Cart</button>
     {{#if category.faceted_search_enabled}}
         <aside class="page-sidebar" id="faceted-search-container">
             {{> components/category/sidebar}}
@@ -56,3 +57,35 @@ category:
 
 {{/partial}}
 {{> layout/base}}
+
+
+
+<script>
+// when #addToCart is clicked...
+$("button#addToCart").click(function() {
+
+	// add product id 123
+    return $.get("/cart.php?action=add&product_id=112")
+	.done(function(data, status, xhr) {
+		console.log('first item complete with status ' + status);
+	})
+	.then(function() {
+		// add product id 456
+		return $.get("/cart.php?action=add&product_id=456");
+	})
+	.done(function(data, status, xhr) {
+		console.log('second item complete with status ' + status);
+	})
+	// chain more async GET requests using .then & .done
+	.fail(function(xhr, status, error) {
+		console.log('oh noes, error with status ' + status + ' and error: ');
+		console.error(error);
+		return xhr.done();
+	})
+	.always(function() {
+		// go to cart
+		return window.location = "/cart.php";
+	});
+
+});
+</script>
